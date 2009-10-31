@@ -32,6 +32,7 @@
 <listOptionValue builtIn="false" value="/usr/include"/>
 <listOptionValue builtIn="false" value="/usr/local/include"/>
 <listOptionValue builtIn="false" value="/usr/include/opencv"/>
+<listOptionValue builtIn="false" value="/usr/include/python2.6"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.430443262" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
@@ -392,9 +393,10 @@
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.1446670630" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release">
 <option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.exe.release.option.optimization.level.81988153" name="Optimization Level" superClass="gnu.c.compiler.exe.release.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.exe.release.option.debugging.level.1051559736" name="Debug Level" superClass="gnu.c.compiler.exe.release.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
-<option id="gnu.c.compiler.option.include.paths.155221453" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+<option id="gnu.c.compiler.option.include.paths.155221453" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="/usr/include"/>
 <listOptionValue builtIn="false" value="/usr/local/include"/>
+<listOptionValue builtIn="false" value="/usr/include/python2.6"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.563791225" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
