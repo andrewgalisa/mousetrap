@@ -28,7 +28,7 @@
 /**
 * OpenCV Webcam Class. This class wraps over the opencv Image Query Functions.
 */
-class opencvWebcam
+class Camera
 {
 public:
     /**
