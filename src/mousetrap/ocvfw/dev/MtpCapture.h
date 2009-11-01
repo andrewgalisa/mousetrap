@@ -25,41 +25,42 @@
 #include "highgui.h"
 #include "MtpCamera.h"
 
-#ifndef _INCL_GUARD_WEBCAM
-#define _INCL_GUARD_WEBCAM
-
 /**
  * OpenCV Webcam Class. This class wraps over the opencv Image Query Functions.
  */
 class MtpCapture
 {
 public:
-    /**
-     *The Constructor
-     *Currently does nothing
-     */
+	/**
+	 *The Constructor
+	 *Currently does nothing
+	 */
 	MtpCapture(void);
 
-    /**
-     * Synchronize the capture quering a new frame.
-     */
-    bool sync();
+	/**
+	 * Resizes the image
+	 */
+	IplImage *resize(int width, int height, bool copy=false);
 
-    /**
-     * Starts/Stops the asynchronous calls to the sync method.
-     */
-    void set_async(int set_fps, bool set_async);
+	/**
+	 * Synchronize the capture quering a new frame.
+	 */
+	bool sync();
+
+	/**
+	 * Starts/Stops the asynchronous calls to the sync method.
+	 */
+	void set_async(int set_fps=100, bool set_async=false);
 
 private:
-    /**
-     *Opencv Capture Structure
-     */
-    IplImage* image;
+	/**
+	 *Opencv Capture Structure
+	 */
+	IplImage* image;
 
-    /**
-     * Camera Object
-     */
-    MtpCamera webcam;
+	/**
+	 * Camera Object
+	 */
+	MtpCamera webcam;
 };
-#endif
 

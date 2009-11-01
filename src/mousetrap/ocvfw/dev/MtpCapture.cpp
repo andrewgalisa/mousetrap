@@ -24,7 +24,7 @@
 #include "highgui.h"
 #include "MtpCamera.h"
 
-#include "glib.h"
+#include <glib.h>
 
 #include "MtpCapture.h"
 
@@ -32,12 +32,7 @@ int fps = 0;
 bool async = false;
 
 MtpCapture::MtpCapture() {
-	webcam.startCamera();
-}
-
-void MtpCapture::init() {
-   if(capture!=0)
-   cvReleaseCapture( &capture );
+	webcam.startCamera(0);
 }
 
 void MtpCapture::set_async(int set_fps=100, bool set_async=false) {
@@ -55,4 +50,8 @@ bool MtpCapture::sync() {
 		return async;
 
 	return async;
+}
+
+IplImage *MtpCapture::resize(int width, int height, bool copy=false) {
+	return image;
 }
