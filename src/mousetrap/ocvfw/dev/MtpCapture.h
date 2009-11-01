@@ -24,7 +24,7 @@
 #include "cv.h"
 #include "highgui.h"
 
-#include <glib.h>
+#include <glibmm.h>
 
 #include "MtpCamera.h"
 
@@ -64,7 +64,7 @@ public:
 	/**
 	 * Synchronize the capture quering a new frame.
 	 */
-	gboolean sync();
+	gboolean sync(gpointer p);
 
 	/**
 	 * Starts/Stops the asynchronous calls to the sync method.

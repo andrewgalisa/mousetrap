@@ -26,7 +26,7 @@
 #include "MtpCamera.h"
 
 #include <stdio.h>
-#include <glib.h>
+#include <glibmm.h>
 
 #include "MtpCapture.h"
 
@@ -45,10 +45,10 @@ void MtpCapture::set_async(int set_fps, bool set_async) {
 	async = set_async;
 
 	if ( set_async == true)
-		g_timeout_add(set_fps, sync);
+		g_timeout_add(set_fps, sync, NULL);
 }
 
-gboolean MtpCapture::sync() {
+gboolean MtpCapture::sync(gpointer p) {
 	image = webcam.queryFrame();
 
 	if (!image)

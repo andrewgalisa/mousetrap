@@ -1,9 +1,23 @@
+import os
 from distutils.core import setup                                                 
 from distutils.core import Extension
 
+os.environ['CC'] = 'g++' 
+os.environ['CXX'] = 'g++'
+os.environ['CPP'] = 'g++'
+os.environ['LDSHARED'] = 'g++'
+
 module2 = Extension('capture',
-                    libraries = ['cv', 'highgui', 'cxcore', 'cvaux', 'ml', 'gstreamer-0.10', 'gobject-2.0', 'gmodule-2.0', 'gthread-2.0', 'rt', 'xml2', 'glib-2.0'],
-                    include_dirs=['/usr/include/opencv', '/usr/include/gstreamer-0.10/', '/usr/include/glib-2.0/', '/usr/lib/glib-2.0/include/', '/usr/include/libxml2/'],
+                    libraries = ['cv', 'highgui', 'cxcore', 'cvaux', 'ml', 'gobject-2.0', 'gmodule-2.0', 'gthread-2.0', 'rt', 'xml2', 'glib-2.0', 'glibmm-2.4', 'sigc-2.0'],
+                    include_dirs=['/usr/include/opencv', 
+                                  '/usr/include/glib-2.0/', 
+                                  '/usr/lib/glib-2.0/include/',
+                                  '/usr/include/glibmm-2.4/', 
+                                  '/usr/lib/glibmm-2.4/include/', 
+                                  '/usr/include/libxml2/',
+                                  '/usr/include/sigc++-2.0/',
+                                  '/usr/include/sigc++-2.0/sigc++/',
+                                  '/usr/lib/sigc++-2.0/include'],
                     sources = ['MtpCamera.cpp', 'MtpCapture.cpp', 'PyMtpCapture.cpp'])
 
 setup(name = 'capture',
