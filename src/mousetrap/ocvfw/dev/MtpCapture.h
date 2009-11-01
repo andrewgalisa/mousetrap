@@ -25,8 +25,6 @@
 #include "highgui.h"
 #include "MtpCamera.h"
 
-//#include "Camera.h"
-
 #ifndef _INCL_GUARD_WEBCAM
 #define _INCL_GUARD_WEBCAM
 
@@ -44,14 +42,13 @@ public:
 
     /**
      * Synchronize the capture quering a new frame.
-     * @result returns 1 for Sucess and 0 for Failure
      */
-    int sync();
+    bool sync();
 
     /**
      * Starts/Stops the asynchronous calls to the sync method.
      */
-    int set_async
+    void set_async(int set_fps, bool set_async);
 
 private:
     /**

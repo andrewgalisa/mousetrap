@@ -33,6 +33,7 @@
 <listOptionValue builtIn="false" value="/usr/local/include"/>
 <listOptionValue builtIn="false" value="/usr/include/opencv"/>
 <listOptionValue builtIn="false" value="/usr/include/python2.6"/>
+<listOptionValue builtIn="false" value="/usr/include/glib-2.0"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.430443262" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
@@ -48,7 +49,7 @@
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1438019628" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.749084407" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug">
-<option id="gnu.both.asm.option.include.paths.1015623977" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath"/>
+<option id="gnu.both.asm.option.include.paths.1015623977" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths"/>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.2139621460" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
 </toolChain>

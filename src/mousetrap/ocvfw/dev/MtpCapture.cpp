@@ -24,12 +24,12 @@
 #include "highgui.h"
 #include "MtpCamera.h"
 
-#include "pthread.h"
+#include "glib.h"
 
 #include "MtpCapture.h"
 
+int fps = 0;
 bool async = false;
-pthread_t thread;
 
 MtpCapture::MtpCapture() {
 	webcam.startCamera();
@@ -40,28 +40,19 @@ void MtpCapture::init() {
    cvReleaseCapture( &capture );
 }
 
-int MtpCapture::set_async(bool val) {
-	int rc;
+void MtpCapture::set_async(int set_fps=100, bool set_async=false) {
+	fps = set_fps;
+	async = set_async;
 
-	if ( val == true) {
-		rc = pthread_create(&thread, NULL, sync());
-
-		if (rc){
-		 printf("ERROR; return code from pthread_create() is %d\n", rc);
-		 return 1;
-		}
-	} else {
-		pthread_exit(0);
-	}
-
-	return 0;
+	if ( set_async == true)
+		g_timeout_add(set_fps, sync, NULL);
 }
 
-int MtpCapture::sync() {
+bool MtpCapture::sync() {
 	image = webcam.queryFrame();
 
 	if (!image)
-		return 1;
+		return async;
 
-	return 0;
+	return async;
 }
