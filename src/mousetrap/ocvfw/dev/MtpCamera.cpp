@@ -31,9 +31,20 @@
 #include <time.h>
 #include <ctype.h>
 
+#include "MtpCamera.h"
+
 static IplImage * orginalFrame=0;
 IplImage * frame=0;
 IplImage * frame_copy=0;
+
+/**
+ * Image Width of Webcam
+ */
+#define IMAGE_WIDTH 320
+/*
+ * Image Height of Webcam
+ */
+#define IMAGE_HEIGHT 240
 
 MtpCamera::MtpCamera()
 {

@@ -23,6 +23,9 @@
 
 #include "cv.h"
 #include "highgui.h"
+
+#include <glib.h>
+
 #include "MtpCamera.h"
 
 /**
@@ -31,11 +34,27 @@
 class MtpCapture
 {
 public:
+
 	/**
-	 *The Constructor
-	 *Currently does nothing
+	 * FPS
+	 */
+	int fps;
+
+	/**
+	 * Whether it has to query images asynchronously
+	 */
+	bool async;
+
+	/**
+	 * The Constructor
+	 * Currently does nothing
 	 */
 	MtpCapture(void);
+
+	/**
+	 * Used to init the camera and capture vars
+	 */
+	void init(int set_fps=100, bool set_async=false, int idx=0);
 
 	/**
 	 * Resizes the image
@@ -45,7 +64,7 @@ public:
 	/**
 	 * Synchronize the capture quering a new frame.
 	 */
-	bool sync();
+	gboolean sync();
 
 	/**
 	 * Starts/Stops the asynchronous calls to the sync method.

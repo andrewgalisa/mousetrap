@@ -20,38 +20,51 @@
  */
 
 
+
 #include "cv.h"
 #include "highgui.h"
 #include "MtpCamera.h"
 
+#include <stdio.h>
 #include <glib.h>
 
 #include "MtpCapture.h"
 
-int fps = 0;
-bool async = false;
-
 MtpCapture::MtpCapture() {
-	webcam.startCamera(0);
+
 }
 
-void MtpCapture::set_async(int set_fps=100, bool set_async=false) {
+void MtpCapture::init(int set_fps, bool set_async, int idx) {
+	fps = set_fps;
+	async = set_async;
+	webcam.startCamera(idx);
+}
+
+void MtpCapture::set_async(int set_fps, bool set_async) {
 	fps = set_fps;
 	async = set_async;
 
 	if ( set_async == true)
-		g_timeout_add(set_fps, sync, NULL);
+		g_timeout_add(set_fps, sync);
 }
 
-bool MtpCapture::sync() {
+gboolean MtpCapture::sync() {
 	image = webcam.queryFrame();
 
 	if (!image)
-		return async;
+		return TRUE;
 
-	return async;
+	return TRUE;
 }
 
-IplImage *MtpCapture::resize(int width, int height, bool copy=false) {
-	return image;
+IplImage *MtpCapture::resize(int width, int height, bool copy) {
+	IplImage *tmp;
+
+	tmp = cvCreateImage(cvSize(width, height), 8, image->nChannels);
+	cvResize(image, tmp, CV_INTER_AREA);
+
+	if (!copy)
+		image = tmp;
+
+	return tmp;
 }
