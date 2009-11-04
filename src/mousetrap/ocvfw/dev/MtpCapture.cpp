@@ -37,34 +37,39 @@ MtpCapture::MtpCapture() {
 void MtpCapture::init(int set_fps, bool set_async, int idx) {
 	fps = set_fps;
 	async = set_async;
-	webcam.startCamera(idx);
+
+	this->syncSlot = sigc::mem_fun(*this, &MtpCapture::sync);
+	this->webcam.startCamera(idx);
 }
 
 void MtpCapture::set_async(int set_fps, bool set_async) {
 	fps = set_fps;
 	async = set_async;
 
-	if ( set_async == true)
-		g_timeout_add(set_fps, sync, NULL);
+	if ( set_async == true) {
+		this->timer = Glib::signal_timeout().connect(this->syncSlot, fps);
+	} else {
+		this->timer.disconnect();
+	}
 }
 
-gboolean MtpCapture::sync(gpointer p) {
-	image = webcam.queryFrame();
+bool MtpCapture::sync() {
+	this->image = this->webcam.queryFrame();
 
-	if (!image)
-		return TRUE;
+	if (!this->image)
+		return true;
 
-	return TRUE;
+	return true;
 }
 
 IplImage *MtpCapture::resize(int width, int height, bool copy) {
 	IplImage *tmp;
 
-	tmp = cvCreateImage(cvSize(width, height), 8, image->nChannels);
-	cvResize(image, tmp, CV_INTER_AREA);
+	tmp = cvCreateImage(cvSize(width, height), 8, this->image->nChannels);
+	cvResize(this->image, tmp, CV_INTER_AREA);
 
 	if (!copy)
-		image = tmp;
+		this->image = tmp;
 
 	return tmp;
 }

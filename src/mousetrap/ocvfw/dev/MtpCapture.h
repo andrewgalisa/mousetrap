@@ -24,6 +24,7 @@
 #include "cv.h"
 #include "highgui.h"
 
+#include <stdio.h>
 #include <glibmm.h>
 
 #include "MtpCamera.h"
@@ -64,7 +65,7 @@ public:
 	/**
 	 * Synchronize the capture quering a new frame.
 	 */
-	gboolean sync(gpointer p);
+	bool sync();
 
 	/**
 	 * Starts/Stops the asynchronous calls to the sync method.
@@ -81,5 +82,17 @@ private:
 	 * Camera Object
 	 */
 	MtpCamera webcam;
+
+
+	/**
+	 * Timer Slot
+	 */
+	sigc::slot<bool> syncSlot;
+
+	/**
+	 * The timer
+	 */
+	sigc::connection timer;
+
 };
 
