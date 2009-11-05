@@ -38,13 +38,13 @@ static void Capture_dealloc(Capture* self) {
 
 static PyObject *
 Capture_set_async(Capture *self, PyObject *args, PyObject *keywds) {
-	int fps = 100, async=1;
+	int fps = 100, async=0;
 
 	static char *kwlist[] = { "fps", "async", NULL };
 
 	PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &fps, &async);
 
-	cap.set_async(fps, (async == 0) ? true : false);
+	cap.set_async(fps, (async == 0) ? false : true);
 	return Py_None;
 }
 

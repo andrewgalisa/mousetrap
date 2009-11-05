@@ -38,8 +38,9 @@ void MtpCapture::init(int set_fps, bool set_async, int idx) {
 	fps = set_fps;
 	async = set_async;
 
-	this->syncSlot = sigc::mem_fun(*this, &MtpCapture::sync);
 	this->webcam.startCamera(idx);
+	this->syncSlot = sigc::mem_fun(*this, &MtpCapture::sync);
+
 }
 
 void MtpCapture::set_async(int set_fps, bool set_async) {
@@ -58,6 +59,8 @@ bool MtpCapture::sync() {
 
 	if (!this->image)
 		return true;
+
+	printf( "%d", this->image->height);
 
 	return true;
 }
