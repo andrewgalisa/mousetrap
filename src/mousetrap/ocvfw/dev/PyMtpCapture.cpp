@@ -18,11 +18,12 @@
  * along with Ocvfw.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 #include "Python.h"
+#include "structmember.h"
+
 #include "cv.h"
 #include "highgui.h"
-
-#include "structmember.h"
 
 #include "MtpCapture.h"
 

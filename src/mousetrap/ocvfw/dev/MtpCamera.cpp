@@ -19,8 +19,6 @@
  * along with Ocvfw.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "cv.h"
-#include "highgui.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -31,6 +29,8 @@
 #include <time.h>
 #include <ctype.h>
 
+#include "cv.h"
+#include "highgui.h"
 #include "MtpCamera.h"
 
 static IplImage * orginalFrame=0;

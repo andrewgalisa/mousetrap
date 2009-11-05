@@ -20,14 +20,12 @@
  */
 
 
+#include <stdio.h>
+#include <glibmm.h>
 
 #include "cv.h"
 #include "highgui.h"
 #include "MtpCamera.h"
-
-#include <stdio.h>
-#include <glibmm.h>
-
 #include "MtpCapture.h"
 
 MtpCapture::MtpCapture() {
