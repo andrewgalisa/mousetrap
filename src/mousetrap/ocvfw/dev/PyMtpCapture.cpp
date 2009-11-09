@@ -38,12 +38,69 @@ static void Capture_dealloc(Capture* self) {
 }
 
 static PyObject *
+Ipl2PyDict(IplImage *frame) {
+	PyObject *tmp;
+
+    if (!frame)
+        return Py_None;
+
+	tmp = PyDict_New();
+	PyDict_SetItemString( tmp, "width",     PyInt_FromLong( frame->width     ) );
+	PyDict_SetItemString( tmp, "height",    PyInt_FromLong( frame->height    ) );
+	PyDict_SetItemString( tmp, "widthStep", PyInt_FromLong( frame->widthStep ) );
+	PyDict_SetItemString( tmp, "depth",     PyInt_FromLong( frame->depth    ) );
+	PyDict_SetItemString( tmp, "imageData", PyString_FromStringAndSize(frame->imageData, frame->imageSize) );
+
+	return tmp;
+}
+
+static PyObject *
+Capture_image(Capture *self) {
+	//return Ipl2PyDict(cap.image());
+	return Ipl2PyDict(cap.image());
+}
+
+static PyObject *
+Capture_rect(Capture *self, PyObject *args, PyObject *keywds) {
+	int x, y, width, height;
+	PyObject *tmp;
+
+	static char *kwlist[] = { "x", "y", "width", "height", NULL };
+
+	PyArg_ParseTupleAndKeywords(args, keywds, "iiii", kwlist, &x, &y, &width, &height);
+
+	tmp = Ipl2PyDict(cap.rect(cvRect(x, y, width, height)));
+
+	return tmp;
+
+}
+
+static PyObject *
+Capture_resize(Capture *self, PyObject *args, PyObject *keywds) {
+	int width, height, copy = 0;
+
+	static char *kwlist[] = { "width", "height", "copy", NULL };
+
+	PyArg_ParseTupleAndKeywords(args, keywds, "ii|i", kwlist, &width, &height, &copy);
+
+	return Ipl2PyDict(cap.resize(width, height, (copy == 0) ? false : true));
+
+}
+
+static PyObject *
+Capture_sync(Capture *self) {
+	cap.sync();
+
+	return Py_None;
+}
+
+static PyObject *
 Capture_set_async(Capture *self, PyObject *args, PyObject *keywds) {
 	int fps = 100, async=0;
 
 	static char *kwlist[] = { "fps", "async", NULL };
 
-	PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &fps, &async);
+	PyArg_ParseTupleAndKeywords(args, keywds, "|ii", kwlist, &fps, &async);
 
 	cap.set_async(fps, (async == 0) ? false : true);
 	return Py_None;
@@ -58,24 +115,28 @@ Capture_new(PyTypeObject *type, PyObject *args, PyObject *kwds) {
 }
 
 static int Capture_init(Capture *self, PyObject *args, PyObject *keywds) {
-	int fps = 100, idx = 0, async = 1;
+	int fps = 100, idx = 0, async = 0;
 
 	static char *kwlist[] = { "fps", "async", "idx", NULL };
 
 	PyArg_ParseTupleAndKeywords(args, keywds, "|iii", kwlist, &fps, &async, &idx);
 
-	cap.init(fps, (async == 0) ? true : false, idx);
+	cap.init(fps, (async == 0) ? false : true, idx);
 
 	return 0;
 }
 
-static PyMemberDef Capture_members[] = { { NULL } /* Sentinel */
+static PyMemberDef Capture_members[] = {
+		{ NULL } /* Sentinel */
 };
 
-static PyMethodDef Capture_methods[] = { { "set_async",
-		(PyCFunction) Capture_set_async, METH_VARARGS|METH_KEYWORDS,
-		PyDoc_STR("Enables disables asynchronous calls to sync method.") }, {
-		NULL } /* Sentinel */
+static PyMethodDef Capture_methods[] = {
+		{ "set_async", (PyCFunction) Capture_set_async, METH_KEYWORDS, PyDoc_STR("Enables disables asynchronous calls to sync method.") },
+		{ "sync", (PyCFunction) Capture_sync, METH_NOARGS, PyDoc_STR("The Sync method that queries new frames.") },
+		{ "image", (PyCFunction) Capture_image, METH_NOARGS, PyDoc_STR("Returns the current IplDict object.") },
+		{ "resize", (PyCFunction) Capture_resize, METH_KEYWORDS, PyDoc_STR("Resizes the current image and returns it.") },
+		{ "rect", (PyCFunction) Capture_rect, METH_KEYWORDS, PyDoc_STR("Returns the required rectangle of the image.") },
+		{NULL } /* Sentinel */
 };
 
 static PyTypeObject CaptureType = { PyObject_HEAD_INIT(NULL)0, /*ob_size*/

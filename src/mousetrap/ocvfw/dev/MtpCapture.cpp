@@ -53,24 +53,40 @@ void MtpCapture::set_async(int set_fps, bool set_async) {
 }
 
 bool MtpCapture::sync() {
-	this->image = this->webcam.queryFrame();
+	this->img = this->webcam.queryFrame();
 
-	if (!this->image)
+	if (!this->img)
 		return true;
 
-	printf( "%d", this->image->height);
-
 	return true;
+}
+
+IplImage *MtpCapture::image() {
+	return this->img;
+}
+
+IplImage *MtpCapture::rect(CvRect rect) {
+	IplImage *p_rect;
+	CvMat p_mat;
+
+
+	p_rect = (IplImage *) cvAlloc(sizeof(IplImage));
+
+	cvGetSubRect(this->img, &p_mat, rect);
+
+	p_rect = cvGetImage(&p_mat, p_rect);
+
+	return p_rect;
 }
 
 IplImage *MtpCapture::resize(int width, int height, bool copy) {
 	IplImage *tmp;
 
-	tmp = cvCreateImage(cvSize(width, height), 8, this->image->nChannels);
-	cvResize(this->image, tmp, CV_INTER_AREA);
+	tmp = cvCreateImage(cvSize(width, height), 8, this->img->nChannels);
+	cvResize(this->img, tmp, CV_INTER_AREA);
 
 	if (!copy)
-		this->image = tmp;
+		this->img = tmp;
 
 	return tmp;
 }

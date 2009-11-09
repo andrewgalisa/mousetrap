@@ -54,13 +54,30 @@ public:
 
 	/**
 	 * Used to init the camera and capture vars
+	 *
+	 * @param set_fps The how frequently should be called the sync method.
+	 * @param set_async Whether to set or not the asynchronous calls.
+	 * @param idx The Camera Index.
 	 */
 	void init(int set_fps=100, bool set_async=false, int idx=0);
 
 	/**
 	 * Resizes the image
+	 *
+	 * @param width The new image width
+	 * @param height The new image height
+	 * @param copy Whether to create a new image with the new size
+	 * 				or replace the current one.
+	 * @return the resized image.
+	 *
 	 */
 	IplImage *resize(int width, int height, bool copy=false);
+
+	/**
+	 * Returns the image and allows users to change the
+	 * current image pointer.
+	 */
+	IplImage *image();
 
 	/**
 	 * Synchronize the capture quering a new frame.
@@ -69,14 +86,25 @@ public:
 
 	/**
 	 * Starts/Stops the asynchronous calls to the sync method.
+	 *
+	 * @param set_fps The how frequently should be called the sync method.
+	 * @param set_async Whether to set or not the asynchronous calls
 	 */
 	void set_async(int set_fps=100, bool set_async=false);
+
+	/**
+	 * Gets and Returns the required rectangle of the image.
+	 *
+	 * @param rect A CvRect object with the new rectangle params.
+	 * @returns  The pointer to the CvMat rectangle.
+	 */
+	IplImage *rect(CvRect rect);
 
 private:
 	/**
 	 *Opencv Capture Structure
 	 */
-	IplImage* image;
+	IplImage* img;
 
 	/**
 	 * Camera Object
