@@ -21,6 +21,8 @@
 
 /** @file */
 
+
+
 #include <stdio.h>
 #include <glibmm.h>
 
@@ -96,9 +98,19 @@ public:
 	 * Gets and Returns the required rectangle of the image.
 	 *
 	 * @param rect A CvRect object with the new rectangle params.
-	 * @returns  The pointer to the CvMat rectangle.
+	 * @returns  The pointer to the IplImage rectangle.
 	 */
 	IplImage *rect(CvRect rect);
+
+	/**
+	 * Changes the color of the current image frame.
+	 *
+	 * @param new_color The new color to set. (Use CV globals).
+	 * @param copy Whether to copy the image or not.
+	 *
+	 * @returns The pointer to the converted image.
+	 */
+	IplImage *color(int channel, int new_color, bool copy=false);
 
 private:
 	/**

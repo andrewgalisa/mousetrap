@@ -76,6 +76,18 @@ Capture_rect(Capture *self, PyObject *args, PyObject *keywds) {
 }
 
 static PyObject *
+Capture_color(Capture *self, PyObject *args, PyObject *keywds) {
+	int new_color, channels, copy;
+
+	static char *kwlist[] = { "new_color", "channels", "copy", NULL };
+
+	PyArg_ParseTupleAndKeywords(args, keywds, "ii|i", kwlist, &channels, &new_color, &copy);
+
+	return Ipl2PyDict(cap.color(channels, new_color, (copy == 0) ? false : true));
+
+}
+
+static PyObject *
 Capture_resize(Capture *self, PyObject *args, PyObject *keywds) {
 	int width, height, copy = 0;
 
@@ -136,6 +148,7 @@ static PyMethodDef Capture_methods[] = {
 		{ "image", (PyCFunction) Capture_image, METH_NOARGS, PyDoc_STR("Returns the current IplDict object.") },
 		{ "resize", (PyCFunction) Capture_resize, METH_KEYWORDS, PyDoc_STR("Resizes the current image and returns it.") },
 		{ "rect", (PyCFunction) Capture_rect, METH_KEYWORDS, PyDoc_STR("Returns the required rectangle of the image.") },
+		{ "color", (PyCFunction) Capture_color, METH_KEYWORDS, PyDoc_STR("Returns the pointer to the converted image.") },
 		{NULL } /* Sentinel */
 };
 

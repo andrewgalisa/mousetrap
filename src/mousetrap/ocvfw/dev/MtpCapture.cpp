@@ -19,7 +19,8 @@
  * along with Ocvfw.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+#include <iostream>
+#include <map>
 #include <stdio.h>
 #include <glibmm.h>
 
@@ -28,8 +29,9 @@
 #include "MtpCamera.h"
 #include "MtpCapture.h"
 
-MtpCapture::MtpCapture() {
+using namespace std;
 
+MtpCapture::MtpCapture() {
 }
 
 void MtpCapture::init(int set_fps, bool set_async, int idx) {
@@ -56,6 +58,7 @@ bool MtpCapture::sync() {
 	this->img = this->webcam.queryFrame();
 
 	if (!this->img)
+		printf("Not Image loaded\n");
 		return true;
 
 	return true;
@@ -77,6 +80,19 @@ IplImage *MtpCapture::rect(CvRect rect) {
 	p_rect = cvGetImage(&p_mat, p_rect);
 
 	return p_rect;
+}
+
+IplImage *MtpCapture::color(int channel, int new_color, bool copy) {
+	IplImage *tmp;
+
+	tmp = cvCreateImage( cvGetSize(this->img), 8,  channel);
+
+	cvCvtColor(this->img, tmp, new_color);
+
+	if (!copy)
+		this->img = tmp;
+
+	return tmp;
 }
 
 IplImage *MtpCapture::resize(int width, int height, bool copy) {
