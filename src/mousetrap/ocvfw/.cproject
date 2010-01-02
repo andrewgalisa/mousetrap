@@ -35,6 +35,7 @@
 <listOptionValue builtIn="false" value="/usr/include/python2.6"/>
 <listOptionValue builtIn="false" value="/usr/include/glibmm-2.4"/>
 <listOptionValue builtIn="false" value="/usr/include/glib-2.0"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ocvfw/include}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.430443262" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>

@@ -119,6 +119,17 @@ Capture_set_async(Capture *self, PyObject *args, PyObject *keywds) {
 }
 
 static PyObject *
+Capture_flip(Capture *self, PyObject *args, PyObject *keywds) {
+	int flip;
+
+	PyArg_ParseTuple(args, "i", &flip);
+
+	cap.flip(flip);
+	return Py_None;
+}
+
+
+static PyObject *
 Capture_new(PyTypeObject *type, PyObject *args, PyObject *kwds) {
 	Capture *self;
 	self = (Capture *) type->tp_alloc(type, 0);
@@ -148,6 +159,7 @@ static PyMethodDef Capture_methods[] = {
 		{ "image", (PyCFunction) Capture_image, METH_NOARGS, PyDoc_STR("Returns the current IplDict object.") },
 		{ "resize", (PyCFunction) Capture_resize, METH_KEYWORDS, PyDoc_STR("Resizes the current image and returns it.") },
 		{ "rect", (PyCFunction) Capture_rect, METH_KEYWORDS, PyDoc_STR("Returns the required rectangle of the image.") },
+		{ "flip", (PyCFunction) Capture_flip, METH_VARARGS, PyDoc_STR("Flips the image") },
 		{ "color", (PyCFunction) Capture_color, METH_KEYWORDS, PyDoc_STR("Returns the pointer to the converted image.") },
 		{NULL } /* Sentinel */
 };

@@ -19,73 +19,9 @@
  * along with Ocvfw.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
-#include <math.h>
-#include <float.h>
-#include <limits.h>
-#include <time.h>
-#include <ctype.h>
 
-#include "cv.h"
-#include "highgui.h"
 #include "MtpCamera.h"
 
-static IplImage * orginalFrame=0;
-IplImage * frame=0;
-IplImage * frame_copy=0;
 
-/**
- * Image Width of Webcam
- */
-#define IMAGE_WIDTH 320
-/*
- * Image Height of Webcam
- */
-#define IMAGE_HEIGHT 240
-
-MtpCamera::MtpCamera()
-{
-
-}
-
-void MtpCamera::stopCamera()
-{
-   if(capture!=0)
-   cvReleaseCapture( &capture );
-}
-int MtpCamera::startCamera(int idx)
-{
-    capture = cvCaptureFromCAM(idx);
-
-    if(capture==0)
-    	return 0;
-    else
-    	return 1;
-}
-
-IplImage *MtpCamera::queryFrame()
-{
-    orginalFrame = cvQueryFrame( capture );
-    if (orginalFrame==NULL)
-    	return 0;
-
-    frame = cvCreateImage( cvSize(IMAGE_WIDTH,IMAGE_HEIGHT),IPL_DEPTH_8U, orginalFrame->nChannels );
-    cvResize(orginalFrame,frame, CV_INTER_LINEAR);
-
-    if ( !frame )
-        return 0;
-
-    frame_copy = cvCreateImage( cvSize(frame->width,frame->height),IPL_DEPTH_8U, frame->nChannels );
-
-    if ( frame->origin == IPL_ORIGIN_TL )
-        cvCopy( frame, frame_copy, 0 );
-    else
-        cvFlip( frame, frame_copy, 0 );
-
-    cvReleaseImage(&frame);
-
-    return frame_copy;
+MtpCamera::MtpCamera(){
 }

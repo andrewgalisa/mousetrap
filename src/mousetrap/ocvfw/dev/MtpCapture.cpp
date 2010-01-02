@@ -95,6 +95,14 @@ IplImage *MtpCapture::color(int channel, int new_color, bool copy) {
 	return tmp;
 }
 
+void MtpCapture::flip(int flip) {
+	if (flip <= 1)
+		cvFlip(this->img, this->img, 1);
+
+	if (flip >= 1)
+		cvFlip(this->img, this->img, 0);
+}
+
 IplImage *MtpCapture::resize(int width, int height, bool copy) {
 	IplImage *tmp;
 
