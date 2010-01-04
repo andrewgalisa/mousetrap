@@ -19,13 +19,13 @@
  */
 
 
-#include "Python.h"
-#include "structmember.h"
-
 #include "cv.h"
 #include "highgui.h"
 
 #include "MtpCapture.h"
+
+#include "Python.h"
+#include "structmember.h"
 
 static MtpCapture cap;
 

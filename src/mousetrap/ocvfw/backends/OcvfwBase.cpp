@@ -102,13 +102,13 @@ int OcvfwBase::waitKey(int num) {
 	return cvWaitKey(num);
 }
 
-int OcvfwBase::getHaarPoints(char haarclassifier) {
+int OcvfwBase::getHaarPoints(char* haarclassifier) {
 	CvHaarClassifierCascade* cascade;
 
 	cascade = (CvHaarClassifierCascade*)cvLoad(haarclassifier, 0, 0, 0);
-	
+
 	if (cascade) {
-		
+
 	}
 }
 

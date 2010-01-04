@@ -34,30 +34,30 @@ class OcvfwBase
 {
 public:
 
-	/**
-	 * The Constructor
-	 * Currently does nothing
-	 */
-	OcvfwBase(void);
+    /**
+     * The Constructor
+     * Currently does nothing
+     */
+    OcvfwBase(void);
 
-	/**
-	 * OpenCV WaitKey call
-	 */
-	int waitKey(int num);
+    /**
+     * OpenCV WaitKey call
+     */
+    int waitKey(int num);
 
-	/**
-	 * Creates a new image. Currently just calls OpenCv CreateImage
-	 *
-	 * @param size The image size
-	 * @param depth The image depth
-	 * @param channels The number of channels.
-	 *
-	 * @return A pointer to the new image.
-	 */
-	IplImage *newImage(CvSize size, int depth, int channels);
+    /**
+     * Creates a new image. Currently just calls OpenCv CreateImage
+     *
+     * @param size The image size
+     * @param depth The image depth
+     * @param channels The number of channels.
+     *
+     * @return A pointer to the new image.
+     */
+    IplImage *newImage(CvSize size, int depth, int channels);
 
 
-	/**
+    /**
      *Query Image From Webcam
      *@result Image From the Webcam
      */
@@ -73,6 +73,13 @@ public:
      *Deinitialize Webcam Structures
      */
     void stopCamera();
+
+    /**
+     * Get Detected Region using Input Haar Cascade
+     * @param Haar Cascade Path
+     *@result returns 1 for Sucess and 0 for Failure
+     */
+    int getHaarPoints(char* haarclassifier) ;
 
 
 private:
