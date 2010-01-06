@@ -42,6 +42,7 @@
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.913841576" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug">
 <option id="gnu.c.link.option.paths.2023863610" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
 <listOptionValue builtIn="false" value="/usr/include"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ocvfw/include}&quot;"/>
 <listOptionValue builtIn="false" value="/usr/local/include"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.linker.input.904072152" superClass="cdt.managedbuild.tool.gnu.c.linker.input">

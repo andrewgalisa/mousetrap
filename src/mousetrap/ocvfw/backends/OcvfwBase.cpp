@@ -38,17 +38,23 @@
 
 static IplImage * orginalFrame=0;
 IplImage * frame=0;
+IplImage * small_frame=0;
 IplImage * frame_copy=0;
 
 /**
  * Image Width of Webcam
  */
 #define IMAGE_WIDTH 320
+
 /*
  * Image Height of Webcam
  */
 #define IMAGE_HEIGHT 240
 
+/*
+ * Image Height of Webcam
+ */
+#define SMALL_FRAME_SCALE 1.5
 
 
 OcvfwBase::OcvfwBase() {
@@ -56,15 +62,16 @@ OcvfwBase::OcvfwBase() {
 
 void OcvfwBase::stopCamera()
 {
-   if(capture!=0)
-   cvReleaseCapture( &capture );
+   if(this->capture!=0)
+   cvReleaseCapture( &this->capture );
 }
 
 int OcvfwBase::startCamera(int idx)
 {
-    capture = cvCaptureFromCAM(idx);
+	this->storage = cvCreateMemStorage(0);
+    this->capture = cvCaptureFromCAM(idx);
 
-    if(capture==0)
+    if(this->capture==0)
     	return 0;
     else
     	return 1;
@@ -72,7 +79,7 @@ int OcvfwBase::startCamera(int idx)
 
 IplImage *OcvfwBase::queryFrame()
 {
-    orginalFrame = cvQueryFrame( capture );
+    orginalFrame = cvQueryFrame( this->capture );
     if (orginalFrame==NULL)
     	return 0;
 
@@ -102,13 +109,15 @@ int OcvfwBase::waitKey(int num) {
 	return cvWaitKey(num);
 }
 
-int OcvfwBase::getHaarPoints(char* haarclassifier) {
+int OcvfwBase::getHaarPoints(IplImage* img, char* haarclassifier) {
 	CvHaarClassifierCascade* cascade;
 
 	cascade = (CvHaarClassifierCascade*)cvLoad(haarclassifier, 0, 0, 0);
 
 	if (cascade) {
-
+		small_frame = this->newImage( cvSize(IMAGE_WIDTH/SMALL_FRAME_SCALE,IMAGE_HEIGHT/SMALL_FRAME_SCALE), IPL_DEPTH_8U, img->nChannels );
+		cvResize(img, small_frame, CV_INTER_LINEAR);
+		cvClearMemStorage(this->storage);
 	}
 }
 

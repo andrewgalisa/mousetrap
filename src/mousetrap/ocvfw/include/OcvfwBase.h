@@ -76,24 +76,28 @@ public:
 
     /**
      * Get Detected Region using Input Haar Cascade
+     * @param The current Image
      * @param Haar Cascade Path
-     *@result returns 1 for Sucess and 0 for Failure
+     * @result returns 1 for Sucess and 0 for Failure
      */
-    int getHaarPoints(char* haarclassifier) ;
+    int getHaarPoints(IplImage* img, char* haarclassifier) ;
 
 
 private:
     /**
-    *Opencv Capture Structure
+    * Opencv Capture Structure
     */
     CvCapture* capture;
+
+    /**
+    * Opencv Mem Storage
+    */
+    CvMemStorage* storage;
 
     /**
      * The camera index.
      */
     int idx;
-
-
 };
 
 #endif /* OCVFWBASE_H_ */
