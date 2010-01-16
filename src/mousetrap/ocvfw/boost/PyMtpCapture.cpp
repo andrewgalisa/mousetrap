@@ -20,13 +20,14 @@
 
 #include "cv.h"
 #include "highgui.h"
-#include "MtpCapture.h"
+#include "Capture.h"
 #include <boost/python.hpp>
 #include <boost/python/module.hpp>
 #include <boost/python/def.hpp>
 
 using namespace std;
 using namespace cv;
+using namespace Mtp;
 using namespace boost::python;
 
 // Defining memebers overloads
@@ -71,14 +72,14 @@ BOOST_PYTHON_MODULE(camera)
 		//.def("adjustROI", &Mat::adjustROI)
 	;
 
-	class_<MtpCapture>("Capture")
-			.def("color", &MtpCapture::color, color_overloads())
-			.def("flip", &MtpCapture::flip)
-			.def("image", &MtpCapture::image)
-			.def("init", &MtpCapture::init)
-			.def("rect", &MtpCapture::rect)
-			.def("resize", &MtpCapture::resize)
-			.def("set_async", &MtpCapture::set_async)
-			.def("sync", &MtpCapture::sync)
+	class_<Capture>("Capture", init<>())
+			.def("color", &Capture::color, color_overloads())
+			.def("flip", &Capture::flip)
+			//.def("image", &Capture::image)
+			.def("init", &Capture::init)
+			.def("rect", &Capture::rect)
+			.def("resize", &Capture::resize)
+			.def("set_async", &Capture::set_async)
+			.def("sync", &Capture::sync)
 	;
 }

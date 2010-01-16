@@ -22,12 +22,12 @@
 #include "cv.h"
 #include "highgui.h"
 
-#include "MtpCapture.h"
+#include "Capture.h"
 
 #include "Python.h"
 #include "structmember.h"
 
-static MtpCapture cap;
+static Capture cap;
 
 typedef struct {
 	PyObject_HEAD

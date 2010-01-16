@@ -23,8 +23,8 @@ module = Extension('camera',
                                   '/usr/include/boost/',
                                   './include/'],
                     sources = ['backends/OcvfwBase.cpp',
-                               'dev/MtpCamera.cpp', 
-                               'dev/MtpCapture.cpp', 
+                               'dev/Camera.cpp', 
+                               'dev/Capture.cpp', 
                                #'dev/PyMtpCapture.cpp',
                                'boost/PyMtpCapture.cpp'
                                ],)
