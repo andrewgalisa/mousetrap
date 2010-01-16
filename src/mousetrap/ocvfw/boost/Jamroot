@@ -1,0 +1,51 @@
+using python ;
+
+# LIBS
+lib libboost_python : : <name>boost_python ;
+lib libcv : : <name>cv ;
+lib libhighgui : : <name>highgui ;
+lib libcxcore : : <name>cxcore ;
+lib libcvaux : : <name>cvaux ;
+lib libml : : <name>ml ;
+lib libgobject-2.0 : : <name>gobject-2.0 ;
+lib libgmodule-2.0 : : <name>gmodule-2.0 ;
+lib libgthread-2.0 : : <name>gthread-2.0 ;
+lib librt : : <name>rt ;
+lib libxml2 : : <name>xml2 ;
+lib libglib-2.0 : : <name>glib-2.0 ;
+lib libglibmm-2.4 : : <name>glibmm-2.4 ;
+lib libsigc-2.0 : : <name>sigc-2.0 ;
+
+
+project
+  : requirements <library>libboost_python
+  				<library>libcv
+  				<library>libhighgui
+  				<library>libcxcore
+  				<library>libcvaux
+  				<library>libml
+  				<library>libgobject-2.0
+  				<library>libgmodule-2.0
+  				<library>libgthread-2.0
+  				<library>librt        
+  				<library>libxml2
+  				<library>libglib-2.0
+  				<library>libglibmm-2.4
+  				<library>libsigc-2.0
+  				<include>/usr/include/opencv
+  				<include>/usr/include/glib-2.0/
+  				<include>/usr/lib/glib-2.0/include/
+  				<include>/usr/include/glibmm-2.4/
+  				<include>/usr/lib/glibmm-2.4/include/
+  				<include>/usr/include/libxml2/
+  				<include>/usr/include/sigc++-2.0/ 
+  				<include>/usr/include/sigc++-2.0/sigc++/
+  				<include>/usr/lib/sigc++-2.0/include 
+  				<include>../include
+  ;
+
+# Declare the three extension modules.  You can specify multiple
+# source files after the colon separated by spaces.
+python-extension camera : PyMtpCapture.cpp ;
+
+
