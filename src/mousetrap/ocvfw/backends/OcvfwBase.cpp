@@ -35,11 +35,13 @@
 #include "highgui.h"
 #include "OcvfwBase.h"
 
+using namespace std;
+using namespace cv;
 
 static IplImage * orginalFrame=0;
-IplImage * frame=0;
-IplImage * small_frame=0;
-IplImage * frame_copy=0;
+IplImage *frame=0;
+IplImage *small_frame=0;
+IplImage *frame_copy=0;
 
 /**
  * Image Width of Webcam
@@ -80,6 +82,7 @@ int OcvfwBase::startCamera(int idx)
 IplImage *OcvfwBase::queryFrame()
 {
     orginalFrame = cvQueryFrame( this->capture );
+
     if (orginalFrame==NULL)
     	return 0;
 

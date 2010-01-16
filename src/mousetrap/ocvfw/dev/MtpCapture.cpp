@@ -30,6 +30,7 @@
 #include "MtpCapture.h"
 
 using namespace std;
+using namespace cv;
 
 MtpCapture::MtpCapture() {
 }
@@ -64,11 +65,11 @@ bool MtpCapture::sync() {
 	return true;
 }
 
-IplImage *MtpCapture::image() {
-	return this->img;
+Mat MtpCapture::image() {
+	return Mat(this->img, true);
 }
 
-IplImage *MtpCapture::rect(CvRect rect) {
+Mat MtpCapture::rect(CvRect rect) {
 	IplImage *p_rect;
 	CvMat p_mat;
 
@@ -79,10 +80,10 @@ IplImage *MtpCapture::rect(CvRect rect) {
 
 	p_rect = cvGetImage(&p_mat, p_rect);
 
-	return p_rect;
+	return Mat(p_rect, true);
 }
 
-IplImage *MtpCapture::color(int channel, int new_color, bool copy) {
+Mat MtpCapture::color(int channel, int new_color, bool copy) {
 	IplImage *tmp;
 
 	tmp = cvCreateImage( cvGetSize(this->img), 8,  channel);
@@ -92,7 +93,7 @@ IplImage *MtpCapture::color(int channel, int new_color, bool copy) {
 	if (!copy)
 		this->img = tmp;
 
-	return tmp;
+	return Mat(tmp, true);
 }
 
 void MtpCapture::flip(int flip) {
@@ -103,7 +104,7 @@ void MtpCapture::flip(int flip) {
 		cvFlip(this->img, this->img, 0);
 }
 
-IplImage *MtpCapture::resize(int width, int height, bool copy) {
+Mat MtpCapture::resize(int width, int height, bool copy) {
 	IplImage *tmp;
 
 	tmp = cvCreateImage(cvSize(width, height), 8, this->img->nChannels);
@@ -112,5 +113,5 @@ IplImage *MtpCapture::resize(int width, int height, bool copy) {
 	if (!copy)
 		this->img = tmp;
 
-	return tmp;
+	return Mat(tmp, true);
 }

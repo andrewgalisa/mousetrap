@@ -31,6 +31,9 @@
 #include "highgui.h"
 #include "MtpCamera.h"
 
+using namespace std;
+using namespace cv;
+
 /**
  * OpenCV Webcam Class. This class wraps over the opencv Image Query Functions.
  */
@@ -73,13 +76,13 @@ public:
 	 * @return the resized image.
 	 *
 	 */
-	IplImage *resize(int width, int height, bool copy=false);
+	Mat resize(int width, int height, bool copy=false);
 
 	/**
 	 * Returns the image and allows users to change the
 	 * current image pointer.
 	 */
-	IplImage *image();
+	Mat image();
 
 	/**
 	 * Synchronize the capture quering a new frame.
@@ -98,9 +101,9 @@ public:
 	 * Gets and Returns the required rectangle of the image.
 	 *
 	 * @param rect A CvRect object with the new rectangle params.
-	 * @returns  The pointer to the IplImage rectangle.
+	 * @returns  The pointer to the Mat rectangle.
 	 */
-	IplImage *rect(CvRect rect);
+	Mat rect(CvRect rect);
 
 	/**
 	 * Changes the color of the current image frame.
@@ -110,18 +113,18 @@ public:
 	 *
 	 * @returns The pointer to the converted image.
 	 */
-	IplImage *color(int channel, int new_color, bool copy=false);
+	Mat color(int channel, int new_color, bool copy=false);
 
 	/**
-		 * Flips the image
-		 *
-		 * @param flip What axis should be flipped.
-		 * 0 horizontally
-		 * 1 horizontal and vertically
-		 * 2 vertically
-		 *
-		 */
-		void flip(int flip);
+	 * Flips the image
+	 *
+	 * @param flip What axis should be flipped.
+	 * 0 horizontally
+	 * 1 horizontal and vertically
+	 * 2 vertically
+	 *
+	 */
+	void flip(int flip);
 
 private:
 	/**
