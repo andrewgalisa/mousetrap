@@ -33,7 +33,7 @@ using namespace boost::python;
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(color_overloads, color, 2, 3)
 
 BOOST_PYTHON_MODULE(camera)
-{ 
+{
 	class_<Mat>("Mat", init<>())
 		.def_readwrite("cols", &Mat::cols )
 		.def_readwrite("rows", &Mat::rows )

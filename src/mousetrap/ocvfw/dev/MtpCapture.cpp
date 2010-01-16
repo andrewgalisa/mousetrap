@@ -35,6 +35,17 @@ using namespace cv;
 MtpCapture::MtpCapture() {
 }
 
+MtpCapture::MtpCapture(IplImage *img) {
+	this->img = img;
+}
+
+MtpCapture::MtpCapture(MtpCapture& cap) {
+	this->webcam = cap.webcam;
+	this->syncSlot = cap.syncSlot;
+	this->timer = cap.timer;
+	this->img = cap.img;
+}
+
 void MtpCapture::init(int set_fps, bool set_async, int idx) {
 	fps = set_fps;
 	async = set_async;

@@ -57,6 +57,10 @@ public:
 	 */
 	MtpCapture(void);
 
+	MtpCapture(IplImage *img);
+
+	MtpCapture(MtpCapture& cap);
+
 	/**
 	 * Used to init the camera and capture vars
 	 *
