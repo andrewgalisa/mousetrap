@@ -23,8 +23,6 @@
  * TODO: set
  * TODO: lk_swap
  * TODO: set_camera_idx
- * TODO: start_camera
- * TODO: query_image
  * TODO: set_lkpoint
  * TODO: clean_lkpoints
  * TODO: show_lkpoints
@@ -42,22 +40,6 @@ static IplImage * orginalFrame=0;
 IplImage *frame=0;
 IplImage *small_frame=0;
 IplImage *frame_copy=0;
-
-/**
- * Image Width of Webcam
- */
-#define IMAGE_WIDTH 320
-
-/*
- * Image Height of Webcam
- */
-#define IMAGE_HEIGHT 240
-
-/*
- * Image Height of Webcam
- */
-#define SMALL_FRAME_SCALE 1.5
-
 
 OcvfwBase::OcvfwBase() {
 }
@@ -110,17 +92,5 @@ IplImage *OcvfwBase::newImage(CvSize size, int depth, int channels) {
 
 int OcvfwBase::waitKey(int num) {
 	return cvWaitKey(num);
-}
-
-int OcvfwBase::getHaarPoints(IplImage* img, char* haarclassifier) {
-	CvHaarClassifierCascade* cascade;
-
-	cascade = (CvHaarClassifierCascade*)cvLoad(haarclassifier, 0, 0, 0);
-
-	if (cascade) {
-		small_frame = this->newImage( cvSize(IMAGE_WIDTH/SMALL_FRAME_SCALE,IMAGE_HEIGHT/SMALL_FRAME_SCALE), IPL_DEPTH_8U, img->nChannels );
-		cvResize(img, small_frame, CV_INTER_LINEAR);
-		cvClearMemStorage(this->storage);
-	}
 }
 

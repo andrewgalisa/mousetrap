@@ -28,6 +28,21 @@
 #define OCVFWBASE_H_
 
 /**
+ * Image Width of Webcam
+ */
+#define IMAGE_WIDTH 320
+
+/*
+ * Image Height of Webcam
+ */
+#define IMAGE_HEIGHT 240
+
+/*
+ * Image Height of Webcam
+ */
+#define SMALL_FRAME_SCALE 1.5
+
+/**
  * Base Framework class.
  */
 class OcvfwBase
@@ -73,14 +88,6 @@ public:
      *Deinitialize Webcam Structures
      */
     void stopCamera();
-
-    /**
-     * Get Detected Region using Input Haar Cascade
-     * @param The current Image
-     * @param Haar Cascade Path
-     * @result returns 1 for Sucess and 0 for Failure
-     */
-    int getHaarPoints(IplImage* img, char* haarclassifier) ;
 
 
 private:

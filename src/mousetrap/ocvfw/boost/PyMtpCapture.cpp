@@ -81,5 +81,6 @@ BOOST_PYTHON_MODULE(camera)
 			.def("resize", &Capture::resize)
 			.def("set_async", &Capture::set_async)
 			.def("sync", &Capture::sync)
+			.def("get_haar_points", &Capture::getHaarPointsPython)
 	;
 }
